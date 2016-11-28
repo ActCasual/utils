@@ -1,0 +1,68 @@
+#!/usr/bin/env python
+
+#----------------------------------------------------------------------------------
+# autorun.py - Steven Busan, 2010
+#
+# Periodically clears the terminal and passes commands to system.
+# No input checking while running, so kill with CTRL-C.
+#----------------------------------------------------------------------------------
+
+import time
+import string
+import sys
+import os
+
+if __name__ == '__main__':
+    
+    if (len(sys.argv) == 1):
+        sys.stderr.write( "usage: autorun.py waitInterval <\"system commands\">\n" )
+        sys.exit(0)
+
+    def argumentString():
+        return sys.argv[2]
+    
+    def interval():
+        return float(sys.argv[1])
+  
+    command = argumentString()
+
+    def printPath():
+        os.system('pwd')
+    
+    def execute():
+        os.system(command)
+    
+    def clearTerm():
+        os.system('clear')
+
+    class Graphic:
+        i=0
+        def display(self):
+            if (self.i==0):
+                print('\n|')
+            if (self.i==1):
+                print('\n/')
+            if (self.i==2):
+                print('\n-')
+            if (self.i==3):
+                print('\n\\')
+            self.i=self.i+1
+            if (self.i>3):
+                self.i=0
+
+    # initialize
+    spinner = Graphic()
+    interval = interval()
+    done = False
+    clearTerm()
+    
+    # main loop
+    while(not done):
+        execute()
+        spinner.display()
+        printPath()
+        time.sleep(interval)
+        clearTerm()
+
+  
+
