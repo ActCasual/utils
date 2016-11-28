@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# FIXME: allow relative path to screen_state file
+# FIXME: create default screen_state file if not present or mangled
 . /home/wahoosteve/rotate_screen/screen_state # load current screen rotation state
 
 states=( normal left )
